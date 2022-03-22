@@ -19,6 +19,7 @@ typedef struct schedule
 {
     Queue *foreQueue;
     Queue *backQueue;
+    int stepsSinceStart;
     //TODO: Put the data for your schedule program here!
 
 

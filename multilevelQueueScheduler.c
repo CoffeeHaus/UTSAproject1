@@ -15,8 +15,16 @@ static const int FOREGROUND_QUEUE_STEPS = 5;
  */
 schedule* createSchedule( ) {
     /* TODO: initialize data in schedule */
-
-    return NULL; /* TODO: Replace with your return value */
+    struct schedule *newschedule = malloc (sizeof (struct schedule));    
+    if(newschedule == NULL)
+    {
+        return NULL;
+    }
+    
+    newschedule->foreQueue = createQueue();
+    newschedule->backQueue = createQueue();
+    newschedule->stepsSinceStart = 0;
+    return newschedule; /* TODO: Replace with your return value */
 }
 
 /* isScheduleUnfinished
@@ -28,7 +36,10 @@ schedule* createSchedule( ) {
  */
 bool isScheduleUnfinished( schedule *ps ) {
     /* TODO: check if there are any process still in a queue.  Return TRUE if there is. */
-    
+    if(!ps.foreQueue.isEmpty && !ps.backQueue.isEmpty)
+    {
+        return true;
+    }
     return false; /* TODO: Replace with your return value */
 }
 
@@ -42,7 +53,8 @@ bool isScheduleUnfinished( schedule *ps ) {
 void addNewProcessToSchedule( schedule *ps, char *processName, priority p ) {
     /* TODO: complete this function.
     The function "initializeProcessData" in processSimulator.c will be useful in completing this. */
-
+    processData * pData = initializeProcessData(processName);
+    ps->foreQueue
     free( processName ); /* TODO: This is to prevent a memory leak but you should remove it once you create a process to put processName into */
 }
 
@@ -86,7 +98,13 @@ char* runNextProcessInSchedule( schedule *ps ) {
 void freeSchedule( schedule *ps ) {
     /* TODO: free any data associated with the schedule as well as the schedule itself.
     the function "freeQueue" in queue.c will be useful in completing this. */
+    if (ps != NULL)
+    {
+        freeQueue(ps->foreQueue);
+        freeQueue(ps->foreQueue);
+        free(ps);
 
+    }
 }
 
 int min( int x, int y ){
