@@ -26,7 +26,9 @@ Queue *createQueue( )
  */
 void freeQueue( Queue *pq )
 {
-    free(pq);
+    if (!pq == NULL) {
+        free(pq);
+    }
 }
 
 /* getNext
@@ -103,7 +105,7 @@ void enqueue( Queue *pq, queueType qt )
  *
  * returns TRUE if the Queue is empty and FALSE otherwise
  */
-bool isEmpty( Queue *pq )
+bool isEmpty( Queue * pq )
 {
     if( pq->qFront==NULL && pq->qRear==NULL )
     {

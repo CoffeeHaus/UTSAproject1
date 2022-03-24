@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 #include "multilevelQueueScheduler.h"
-
+#undef min
 int min( int x, int y );
 
 static const int STEPS_TO_PROMOTION = 50;
@@ -36,7 +36,7 @@ schedule* createSchedule( ) {
  */
 bool isScheduleUnfinished( schedule *ps ) {
     /* TODO: check if there are any process still in a queue.  Return TRUE if there is. */
-    if(!ps.foreQueue.isEmpty && !ps.backQueue.isEmpty)
+    if(!isEmpty(ps->foreQueue) && !isEmpty(ps->backQueue))
     {
         return true;
     }
@@ -54,8 +54,10 @@ void addNewProcessToSchedule( schedule *ps, char *processName, priority p ) {
     /* TODO: complete this function.
     The function "initializeProcessData" in processSimulator.c will be useful in completing this. */
     processData * pData = initializeProcessData(processName);
-    ps->foreQueue
-    free( processName ); /* TODO: This is to prevent a memory leak but you should remove it once you create a process to put processName into */
+
+    if (p == FOREGROUND) { enqueue(ps->foreQueue, ); }
+        ps->foreQueue
+    //free( processName ); /* TODO: This is to prevent a memory leak but you should remove it once you create a process to put processName into */
 }
 
 /* runNextProcessInSchedule

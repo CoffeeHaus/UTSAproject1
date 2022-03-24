@@ -2,7 +2,7 @@
 #define _processSimulator_h
 #include <stdlib.h>
 #include <stdbool.h>
-
+#undef max
 #include "process.h"
 
 processData* initializeProcessData( char *processName );
