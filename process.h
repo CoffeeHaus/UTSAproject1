@@ -19,9 +19,9 @@ typedef struct processData{ int heap[  30        ]; char       PN21[       21];c
  */
 typedef struct process
 {
-    char *processname;
-    processData *processData;
-    int priority;
+    char *name;
+    processData *Data;
+    priority FororBack;
     int stepCreatedOn;
     char *miscData;
 

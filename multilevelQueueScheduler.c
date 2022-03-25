@@ -53,10 +53,18 @@ bool isScheduleUnfinished( schedule *ps ) {
 void addNewProcessToSchedule( schedule *ps, char *processName, priority p ) {
     /* TODO: complete this function.
     The function "initializeProcessData" in processSimulator.c will be useful in completing this. */
+    printf("%s\n", processName);
+    process * newprocess;
     processData * pData = initializeProcessData(processName);
+    newprocess->Data =  pData;
+    newprocess->name = processName;
+    newprocess->FororBack = p;
 
-    if (p == FOREGROUND) { enqueue(ps->foreQueue, ); }
-        ps->foreQueue
+
+    if (newprocess->FororBack  == FOREGROUND) { enqueue(ps->foreQueue, newprocess); }
+    else {enqueue(ps->backQueue, newprocess);}
+
+
     //free( processName ); /* TODO: This is to prevent a memory leak but you should remove it once you create a process to put processName into */
 }
 
@@ -74,19 +82,19 @@ char* runNextProcessInSchedule( schedule *ps ) {
     in processSimulator.c will be useful in completing this.
     You may want to write a helper function to handle promotion */
     char *ret = NULL;
-    //int numSteps = 0;
-    
+    int numSteps = 0;
+    process * proc = NULL;
     /* TODO: Delete the following printf once you get the infinite loop fixed */
     printf("IMPORTANT NOTE: There will be an intinite loop in runNextProcessInSchedule if you get isScheduleUnfinished and addNewProcessToSchedule working correctly\n"); 
-    /* TODO: Uncomment the code below to dequeue elements from the two Queues and break your code out of the infinite loop
+    // TODO: Uncomment the code below to dequeue elements from the two Queues and break your code out of the infinite loop
     if( !isEmpty(ps->foreQueue) )
-        dequeue(ps->foreQueue);
+        proc = dequeue(ps->foreQueue);
     else if( !isEmpty(ps->backQueue) )
-        dequeue(ps->backQueue);
-    */
+        proc = dequeue(ps->backQueue);
+    
     
     /* your call to runProcess will look something like this: */
-    // bool b = runProcess( /* name of process */, &ret, &numSteps );
+     bool b = runProcess( proc, &ret, &numSteps );
     
     return ret; /* TODO: be sure to store the value returned by runProcess in ret */
 }
